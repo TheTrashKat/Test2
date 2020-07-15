@@ -1,16 +1,278 @@
-<html>
-<head>
-<title>Technical Academy</title> <! — Maximum of 65 characters →
-<meta name=”description” content=”Technical Academy provide you best learning resources for javascript and related frameworks.”> <! — Maximum of 155 characters →
-<meta property=”og:title” content=”Learn Technology “ /> <! — Maximum 35 characters →
-<meta property=”og:url” content=”https://www.example.com/webpage/" /> <! — Full link to your webpage address →
-<meta property=”og:description” content=”Technical Academy provide you best learning resources for javascript”> <! — Maximum 65 characters →
-<meta property="og:image" content="//cdn.example.com/uploads/images/webpage_300x200.png">
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dynamic and Resizable Tee Designer</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <style>
 
-<meta property=”og:type” content=”article” />
-</head>
-<body>
-<img src=”https://www.elegantthemes.com/blog/wp-content/uploads/2017/09/whatsapp-featured.jpg”/>
-<h1> PUTO PACO </h1>
-</body>
+
+              .responsive {
+                width: auto;
+                height: auto;
+              }
+
+            .drawing-area{
+                position: absolute;
+                top: 60px;
+                left: 122px;
+                z-index: 10;
+                width: 200px;
+                height: 400px;
+                visibility: none
+            }
+
+            .canvas-container{
+                width: 248px; 
+                height: 350px; 
+                position: relative; 
+                user-select: none;
+            }
+
+            #tshirt-div{
+                width: auto;
+                height: 548px;
+                position: relative;
+                background-color: #fff;
+            }
+
+            #canvas{
+                position: relative;
+                width: 248px;
+                height: 350px; 
+                left: 0px; 
+                top: 0px; 
+                user-select: true; 
+                cursor: default;
+            }
+        </style>
+    </head>
+    <body>
+      <img src="./diseniodepagina.jpg" class="responsive">
+
+
+
+      <h1 align ="center"><i></i></h1>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		  Launch demo modal
+		</button>
+
+		<!-- Modal -->
+
+		<div class="container">
+  <!-- Content here -->
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Personalize su camiseta</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        
+
+		        <!-- Create the container of the tool -->
+		        <div id="tshirt-div"  >
+		            <img id="tshirt-backgroundpicture" src="./background.png" class="responsive" />
+		            <div id="drawingArea" class="drawing-area" >					
+		                <div class="canvas-container">
+		                    <canvas id="tshirt-canvas" width="248" height="350.8" ></canvas>
+		                </div>
+		            </div>
+		        </div>
+		        
+
+		        <label for="tshirt-design">T-Shirt Design:</label>
+		        <select id="tshirt-design">
+		            <option value="">Select one of our designs ...</option>
+		            <option value="./batman_small.png">Batman</option>
+		        </select>
+
+				<div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <label class="input-group-text" for="tshirt-color">Color</label>
+				  </div>
+				  <select class="custom-select" id="tshirt-color">
+		            <option value="#fff">Blanco</option>
+		            <option value="#000">Negro</option>
+		            <option value="#f00">Rojo</option>
+		            <option value="#008000">Verde</option>
+		            <option value="#ff0">Amarillo</option>
+				  </select>
+				</div>
+
+				<div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
+				  </div>
+				  <div class="custom-file">
+				    <input type="file" class="custom-file-input" id="tshirt-custompicture" aria-describedby="inputGroupFileAddon01">
+				    <label class="custom-file-label" for="tshirt-custompicture">Seleccione Archivo</label>
+				  </div>
+				</div>
+		       
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="saveGood()">Save changes</button>
+            <div id='dwn'></div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+</div>
+
+        <!-- Include Fabric.js in the page -->
+        <script src="./fabric.min.js"></script>
+
+     
+
+        <script>
+            let canvas = new fabric.Canvas('tshirt-canvas');
+
+            function saveGood(){
+              zoomCanvas(10);
+              muestra_oculta('tshirt-canvas');
+              do_save();
+              zoomCanvas(0.1);
+              muestra_oculta('tshirt-canvas');
+              
+
+
+            }
+
+
+              function muestra_oculta(id){
+                  if (document.getElementById){ //se obtiene el id
+                  var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+                  el.style.display = (el.style.display == 'none') ? 'block' : 'none'; //damos un atributo display:none que oculta el div
+                  }
+                  }
+                  window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                  muestra_oculta('contenido');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+              }
+
+              function zoomCanvas(factor) {
+              canvas.setHeight(canvas.getHeight() * factor);
+              canvas.setWidth(canvas.getWidth() * factor);
+              if (canvas.backgroundImage) {
+                  // Need to scale background images as well
+                  var bi = canvas.backgroundImage;
+                  bi.width = bi.width * factor; bi.height = bi.height * factor;
+              }
+              var objects = canvas.getObjects();
+
+
+
+              var tcounter = 0;
+
+              for (var i in objects) {
+
+                  tcounter++;
+
+
+                  //alert(tcounter);
+                  var scaleX = objects[i].scaleX;
+                  var scaleY = objects[i].scaleY;
+                  var left = objects[i].left;
+                  var top = objects[i].top;
+
+                  var tempScaleX = scaleX * factor;
+                  var tempScaleY = scaleY * factor;
+                  var tempLeft = left * factor;
+                  var tempTop = top * factor;
+
+                  objects[i].scaleX = tempScaleX;
+                  objects[i].scaleY = tempScaleY;
+                  objects[i].left = tempLeft;
+                  objects[i].top = tempTop;
+
+                  objects[i].setCoords();
+              }
+              canvas.renderAll();
+              canvas.calcOffset();
+              }
+
+
+            function do_save() {
+              var filedata=canvas.toSVG(); // the SVG file is now in filedata
+          
+              var locfile = new Blob([filedata], {type: "image/svg+xml;charset=utf-8"});
+              var locfilesrc = URL.createObjectURL(locfile);//mylocfile);
+          
+              var dwn = document.getElementById('dwn');
+              dwn.innerHTML = "<a href=" + locfilesrc + " download='mysvg.svg'>Download</a>";
+            }
+
+
+            function updateTshirtImage(imageURL){
+                fabric.Image.fromURL(imageURL, function(img) {                   
+                    img.scaleToHeight(300);
+                    img.scaleToWidth(300); 
+                    canvas.centerObject(img);
+                    canvas.add(img);
+                    canvas.renderAll();
+                });
+            }
+            
+            // Update the TShirt color according to the selected color by the user
+            document.getElementById("tshirt-color").addEventListener("change", function(){
+                document.getElementById("tshirt-div").style.backgroundColor = this.value;
+            }, false);
+
+            // Update the TShirt color according to the selected color by the user
+            document.getElementById("tshirt-design").addEventListener("change", function(){
+
+                // Call the updateTshirtImage method providing as first argument the URL
+                // of the image provided by the select
+                updateTshirtImage(this.value);
+            }, false);
+
+            // When the user clicks on upload a custom picture
+            document.getElementById('tshirt-custompicture').addEventListener("change", function(e){
+                var reader = new FileReader();
+                
+                reader.onload = function (event){
+                    var imgObj = new Image();
+                    imgObj.src = event.target.result;
+
+                    // When the picture loads, create the image in Fabric.js
+                    imgObj.onload = function () {
+                        var img = new fabric.Image(imgObj);
+
+                        img.scaleToHeight(300);
+                        img.scaleToWidth(300); 
+                        canvas.centerObject(img);
+                        canvas.add(img);
+                        canvas.renderAll();
+                    };
+                };
+
+                // If the user selected a picture, load it
+                if(e.target.files[0]){
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            }, false);
+
+            // When the user selects a picture that has been added and press the DEL key
+            // The object will be removed !
+            document.addEventListener("keydown", function(e) {
+                var keyCode = e.keyCode;
+
+                if(keyCode == 46){
+                    console.log("Removing selected element on Fabric.js on DELETE key !");
+                    canvas.remove(canvas.getActiveObject());
+                }
+            }, false);
+        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </body>
 </html>
